@@ -1,7 +1,7 @@
 # Knuth Morris Pratt, Pattern Searchingk
 # O(n) in worst case
 
-def KMPProprocessing(pat):
+def KMPPreprocessing(pat):
    matches = 0
    lps = [0]
    for i in range(1, len(pat)):
@@ -12,8 +12,28 @@ def KMPProprocessing(pat):
        lps.append(matches)
    return lps
 
-prep = "AAAAA"
-print(KMPProprocessing(prep))
+def KMP(text, pat):
+    lps = KMPPreprocessing(pat)
+    i = 0
+    j = 0
+    M = len(text)
+    N = len(pat)
+    while i < M:
+        if text[i] == pat[j]:
+            i += 1
+            j += 1
 
-prompt = "AABAACAABAA"
-print(KMPProprocessing(prompt))
+        if j == N:
+            print("Match found at index ", i-j)
+            j = lps[j-1]
+
+        elif i < M and pat[j] != text[i]:
+            if j != 0:
+                j = lps[j-1]
+            else:
+                i += 1
+
+test = "BAAAATMAAAAAN"
+pat = "AAA"
+
+KMP(test, pat)
