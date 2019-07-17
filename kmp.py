@@ -1,4 +1,4 @@
-# Knuth Morris Pratt, Pattern Searchingk
+# Knuth Morris Pratt, Pattern Searching
 # O(n) in worst case
 
 def KMPPreprocessing(pat):
