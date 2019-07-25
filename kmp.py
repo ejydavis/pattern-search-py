@@ -7,9 +7,12 @@ def KMPPreprocessing(pat):
    for i in range(1, len(pat)):
        if pat[i] == pat[i-1]:
            matches += 1
+           lps[i] = matches
        else:
-           matches = 0
-       lps.append(matches)
+           if matches != 0:
+               matches = lps[matches-1]
+           else:
+               lps[i] = 0
    return lps
 
 def KMP(text, pat):
